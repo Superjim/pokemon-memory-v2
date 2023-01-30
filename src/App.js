@@ -10,8 +10,12 @@ function App() {
   const [gameData, setGameData] = useState([]);
   const [gameState, setGameState] = useState([]);
   const [clicked, setClicked] = useState([]);
+
+  //score states
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+
+  //game render states
   const [loading, setLoading] = useState(true);
   const [gameover, setGameover] = useState(false);
   const [page, setPage] = useState(1);
