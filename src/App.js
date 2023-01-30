@@ -68,7 +68,9 @@ function App() {
     return (
       <div className="App">
         <div className="score-card">
-          <h3>Score: {score}</h3>
+          <h3>
+            Score: {score} / {gameState.length}
+          </h3>
         </div>
         <div className="pokemon-container">
           {gameState.map((pokemon) => (
