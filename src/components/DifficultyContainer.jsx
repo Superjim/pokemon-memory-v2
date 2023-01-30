@@ -29,11 +29,12 @@ function DifficultyContainer({ setGameData }) {
   }
 
   return (
-    <>
+    <div className="difficulty-container">
       <CheckboxContainer
         setRangeDifficulty={setRangeDifficulty}
         setMaxDifficulty={setMaxDifficulty}
       />
+      <h3>Difficulty: {userDifficulty} Pokemon</h3>
       <input
         name="difficultyInput"
         id="difficultyInput"
@@ -43,9 +44,12 @@ function DifficultyContainer({ setGameData }) {
         value={userDifficulty}
         onChange={(e) => setUserDifficulty(+e.target.value)}
       ></input>
-      {userDifficulty}
-      <button onClick={createRandomArray}>Send difficulty data</button>
-    </>
+      <p>
+        Get points by clicking on a Pokemon, but don't click on one more than
+        once!
+      </p>
+      <button onClick={createRandomArray}>Start Game!</button>
+    </div>
   );
 }
 

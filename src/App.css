@@ -5,11 +5,49 @@
   align-items: center;
 }
 
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80vw;
+}
+
+.container-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+  border: 3px solid black;
+  border-radius: 2rem;
+  padding: 2rem 0 2rem 0;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0px 5px 10px 1px;
+  min-width: 60%;
+  min-height: 50vh;
+}
+
+.container-wrapper > h3,
+h2 {
+  margin: 0;
+}
+
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
 .pokemon-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding: 0 1rem 0 1rem;
   gap: 1rem;
 }
 
@@ -23,7 +61,9 @@
   text-transform: capitalize;
   height: 149px;
   width: 96px;
-  box-shadow: 0px 5px 10px 1px;
+  box-shadow: 0px 5px 10px 1px black;
+  font-weight: 600;
+  border: 2px solid black;
 }
 
 .pokemon-card:hover {
@@ -31,8 +71,20 @@
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.5);
 }
 
+.difficulty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 80vw;
+  gap: 2rem;
+}
+
 .checkbox-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -49,7 +101,7 @@
 
 .checkbox:hover {
   cursor: pointer;
-  background-color: azure;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.5);
 }
 
 .normal {
@@ -62,6 +114,7 @@
 
 .water {
   background-color: #6890f0;
+  color: white;
 }
 
 .grass {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import DifficultyContainer from "./components/DifficultyContainer";
 import PokemonCard from "./components/PokemonCard";
+import Header from "./components/Header";
+import Gameover from "./components/Gameover";
 import "./App.css";
 
 function App() {
@@ -9,6 +11,7 @@ function App() {
   const [gameState, setGameState] = useState([]);
   const [clicked, setClicked] = useState([]);
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [gameover, setGameover] = useState(false);
 
@@ -22,15 +25,28 @@ function App() {
   }
 
   function handleCheck(pokemon) {
-    //if user clicks same pokemon twice
+    //lose condition: if user clicks same pokemon twice
     if (clicked.includes(pokemon)) {
       setClicked([...clicked, pokemon]);
+      if (score > highScore) setHighScore(score);
       setGameover(true);
     } else {
       setClicked([...clicked, pokemon]);
       shufflePokemon();
       setScore(score + 1);
+
+      // win condition
+      if (clicked.length === gameData.length) {
+        setGameover(true);
+      }
     }
+  }
+
+  function newGame() {
+    setLoading(true);
+    setScore(0);
+    setGameover(false);
+    setClicked([]);
   }
 
   useEffect(() => {
@@ -60,6 +76,8 @@ function App() {
   if (loading) {
     return (
       <div className="App">
+        <Header score={score} highScore={highScore} gameState={gameState} />
+
         <DifficultyContainer setGameData={setGameData} />
       </div>
     );
@@ -67,11 +85,12 @@ function App() {
   if (!loading && !gameover) {
     return (
       <div className="App">
-        <div className="score-card">
-          <h3>
-            Score: {score} / {gameState.length}
-          </h3>
-        </div>
+        <Header
+          score={score}
+          highScore={highScore}
+          gameState={gameState}
+          gameover={gameover}
+        />
         <div className="pokemon-container">
           {gameState.map((pokemon) => (
             <PokemonCard
@@ -88,26 +107,13 @@ function App() {
   if (gameover) {
     return (
       <div className="App">
-        <p>You lose! Score: {score}. You clicked this one twice:</p>
-        <PokemonCard
-          key={`${clicked[clicked.length - 1].name}-${
-            clicked[clicked.length - 1].index
-          }`}
-          pokemon={clicked[clicked.length - 1]}
-          type={clicked[clicked.length - 1].type}
-          handleCheck={handleCheck}
+        <Header score={score} highScore={highScore} gameState={gameState} />
+        <Gameover
+          score={score}
+          clicked={clicked}
+          gameState={gameState}
+          newGame={newGame}
         />
-        <p>You clicked on:</p>
-        <div className="pokemon-container">
-          {clicked.slice(0, -1).map((pokemon) => (
-            <PokemonCard
-              key={`${pokemon.name}-${pokemon.index}`}
-              pokemon={pokemon}
-              type={pokemon.type}
-              handleCheck={handleCheck}
-            />
-          ))}
-        </div>
       </div>
     );
   }
