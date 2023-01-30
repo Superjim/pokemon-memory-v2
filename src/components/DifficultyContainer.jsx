@@ -28,6 +28,12 @@ function DifficultyContainer({ setGameData }) {
     setGameData(numbers);
   }
 
+  const style = {
+    background: `linear-gradient(to right, green, red ${
+      100 - (userDifficulty / maxDifficulty) * 100
+    }%)`,
+  };
+
   return (
     <div className="difficulty-container">
       <CheckboxContainer
@@ -43,6 +49,7 @@ function DifficultyContainer({ setGameData }) {
         max={maxDifficulty}
         value={userDifficulty}
         onChange={(e) => setUserDifficulty(+e.target.value)}
+        style={style}
       ></input>
       <p>
         Get points by clicking on a Pokemon, but don't click on one more than
