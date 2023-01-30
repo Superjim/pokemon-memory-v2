@@ -54,6 +54,7 @@ function App() {
     setScore(0);
     setGameover(false);
     setClicked([]);
+    setPage(1);
   }
 
   useEffect(() => {
