@@ -8,8 +8,11 @@ function App() {
   const [gameState, setGameState] = useState([]);
   const [loading, setLoading] = useState(true);
   const [gameover, setGameover] = useState(false);
-  const [userDifficulty, setUserDifficulty] = useState(10);
-  const [rangeDifficulty, setRangeDifficulty] = useState([[1, 151]]);
+
+  function shufflePokemon() {
+    const shuffled = gameState.sort(() => 0.5 - Math.random());
+    setGameState(shuffled);
+  }
 
   useEffect(() => {
     function getPokemonData() {
@@ -35,21 +38,10 @@ function App() {
     getPokemonData();
   }, [gameData]);
 
-  function shufflePokemon() {
-    const shuffled = gameData.sort(() => 0.5 - Math.random());
-    setGameData(shuffled);
-  }
-
   if (loading) {
     return (
       <div className="App">
-        <DifficultyContainer
-          rangeDifficulty={rangeDifficulty}
-          userDifficulty={userDifficulty}
-          setUserDifficulty={setUserDifficulty}
-          setRangeDifficulty={setRangeDifficulty}
-          setGameData={setGameData}
-        />
+        <DifficultyContainer setGameData={setGameData} />
       </div>
     );
   }
@@ -64,6 +56,7 @@ function App() {
             </div>
           ))}
         </div>
+        <button onClick={shufflePokemon}>Click</button>
       </div>
     );
   }

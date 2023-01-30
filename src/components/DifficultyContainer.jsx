@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import CheckboxContainer from "./CheckboxContainer";
 
-function DifficultyContainer({
-  rangeDifficulty,
-  userDifficulty,
-  setUserDifficulty,
-  setRangeDifficulty,
-  setGameData,
-}) {
+function DifficultyContainer({ setGameData }) {
   const [maxDifficulty, setMaxDifficulty] = useState(151);
+  const [rangeDifficulty, setRangeDifficulty] = useState([[1, 151]]);
+  const [userDifficulty, setUserDifficulty] = useState(10);
 
   useEffect(() => {
     if (userDifficulty > maxDifficulty) setUserDifficulty(maxDifficulty);
