@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import PokemonCard from "./PokemonCard";
 
-function Gameover({ score, clicked, gameState, newGame }) {
-  const [page, setPage] = useState(1);
-
+function Gameover({ score, clicked, gameState, newGame, page, setPage }) {
   function nextPage() {
     setPage(page + 1);
   }
@@ -82,19 +80,41 @@ function Gameover({ score, clicked, gameState, newGame }) {
     return (
       <div className="container-wrapper">
         <h3>Game Over!</h3>
+
+        <div className="pokemon-container">
+          <PokemonCard
+            key={`${clicked[clicked.length - 1].name}-${
+              clicked[clicked.length - 1].index
+            }`}
+            pokemon={clicked[clicked.length - 1]}
+            type={clicked[clicked.length - 1].type}
+            handleCheck={newGame}
+          />
+        </div>
+        <button onClick={newGame}>Play Again</button>
+      </div>
+    );
+  }
+  if (page === 5) {
+    return (
+      <div id="endgame-1" className="container-wrapper">
+        <h2>
+          Well done! You scored a maximum of {score} out of {gameState.length}{" "}
+          points!
+        </h2>
         <div className="button-wrapper">
-          <button onClick={prevPage}>Back</button>
+          <button disabled>Back</button>
           <div className="pokemon-container">
-            <PokemonCard
-              key={`${clicked[clicked.length - 1].name}-${
-                clicked[clicked.length - 1].index
-              }`}
-              pokemon={clicked[clicked.length - 1]}
-              type={clicked[clicked.length - 1].type}
-              handleCheck={newGame}
-            />
+            {gameState.map((pokemon) => (
+              <PokemonCard
+                key={`${pokemon.name}-${pokemon.index}`}
+                pokemon={pokemon}
+                type={pokemon.type}
+                handleCheck={prevPage}
+              />
+            ))}
           </div>
-          <button onClick={newGame}>Next</button>
+          <button onClick={prevPage}>Next</button>
         </div>
       </div>
     );

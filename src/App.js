@@ -14,6 +14,7 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [gameover, setGameover] = useState(false);
+  const [page, setPage] = useState(1);
 
   function shufflePokemon() {
     const shuffled = [...gameState];
@@ -36,8 +37,9 @@ function App() {
       setScore(score + 1);
 
       // win condition
-      if (clicked.length === gameData.length) {
+      if (clicked.length === gameData.length - 1 && gameData.length !== 0) {
         setGameover(true);
+        setPage(5);
       }
     }
   }
@@ -113,6 +115,8 @@ function App() {
           clicked={clicked}
           gameState={gameState}
           newGame={newGame}
+          page={page}
+          setPage={setPage}
         />
       </div>
     );
