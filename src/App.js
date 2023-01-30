@@ -40,6 +40,7 @@ function App() {
       if (clicked.length === gameData.length - 1 && gameData.length !== 0) {
         setGameover(true);
         setPage(5);
+        if (score + 1 > highScore) setHighScore(score + 1);
       }
     }
   }
