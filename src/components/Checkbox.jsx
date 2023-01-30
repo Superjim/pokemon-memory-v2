@@ -6,8 +6,8 @@ function Checkbox({ label, id, range, image, checked, onChange }) {
       {label}
       <br />
       <input type="checkbox" id={id} checked={checked} onChange={onChange} />
+      {image && <img src={image} alt={label} width={100} />}
       <span>{range}</span>
-      {/* {image && <img src={image} alt={label} width={100} height={100} />} */}
     </div>
   );
 }

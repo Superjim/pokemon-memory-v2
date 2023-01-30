@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Checkbox from "./Checkbox";
-import gen1 from "../images/gen1.jpg";
+import gen1 from "../images/gen1.png";
+import gen2 from "../images/gen2.png";
+import gen3 from "../images/gen3.png";
+import gen4 from "../images/gen4.png";
+import gen5 from "../images/gen5.png";
+import gen6 from "../images/gen6.png";
+import gen7 from "../images/gen7.png";
+import gen8 from "../images/gen8.png";
 
 function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
   //checkbox state
@@ -75,7 +82,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 2"
         id="generation2"
         range="(152 - 251)"
-        image="gen2"
+        image={gen2}
         checked={generation2}
         onChange={() => setGeneration2(!generation2)}
       />
@@ -83,7 +90,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 3"
         id="generation3"
         range="(252 - 386)"
-        image="gen3"
+        image={gen3}
         checked={generation3}
         onChange={() => setGeneration3(!generation3)}
       />
@@ -91,7 +98,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 4"
         id="generation4"
         range="(387 - 493)"
-        image="gen4"
+        image={gen4}
         checked={generation4}
         onChange={() => setGeneration4(!generation4)}
       />
@@ -99,7 +106,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 5"
         id="generation5"
         range="(494 - 649)"
-        image="gen5"
+        image={gen5}
         checked={generation5}
         onChange={() => setGeneration5(!generation5)}
       />
@@ -107,7 +114,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 6"
         id="generation6"
         range="(650 - 721)"
-        image="gen6"
+        image={gen6}
         checked={generation6}
         onChange={() => setGeneration6(!generation6)}
       />
@@ -115,7 +122,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 7"
         id="generation7"
         range="(722 - 809)"
-        image="gen7"
+        image={gen7}
         checked={generation7}
         onChange={() => setGeneration7(!generation7)}
       />
@@ -123,7 +130,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         label="Generation 8"
         id="generation8"
         range="(810 - 905)"
-        image="gen8"
+        image={gen8}
         checked={generation8}
         onChange={() => setGeneration8(!generation8)}
       />
