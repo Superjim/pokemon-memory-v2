@@ -19,7 +19,10 @@ function DifficultyContainer({ setGameData }) {
       }
     });
     //randomise the array
-    numbers = numbers.sort(() => Math.random() - 0.5);
+    for (let i = numbers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
 
     //splice the array with difficulty
     numbers = numbers.splice(0, userDifficulty);
