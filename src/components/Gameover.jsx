@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
+import Leaderboard from "./Leaderboard";
 import PokemonCard from "./PokemonCard";
 
-function Gameover({ score, clicked, gameState, newGame, page, setPage }) {
+function Gameover({
+  score,
+  clicked,
+  gameState,
+  newGame,
+  page,
+  setPage,
+  firestore,
+  auth,
+}) {
   function nextPage() {
     setPage(page + 1);
   }
@@ -80,8 +90,13 @@ function Gameover({ score, clicked, gameState, newGame, page, setPage }) {
     return (
       <div className="container-wrapper">
         <h3>Game Over!</h3>
-
-        <div className="pokemon-container">
+        <Leaderboard
+          firestore={firestore}
+          auth={auth}
+          score={score}
+          gameState={gameState}
+        />
+        {/* <div className="pokemon-container">
           <PokemonCard
             key={`${clicked[clicked.length - 1].name}-${
               clicked[clicked.length - 1].index
@@ -90,7 +105,7 @@ function Gameover({ score, clicked, gameState, newGame, page, setPage }) {
             type={clicked[clicked.length - 1].type}
             handleCheck={newGame}
           />
-        </div>
+        </div> */}
         <button onClick={newGame}>Play Again</button>
       </div>
     );

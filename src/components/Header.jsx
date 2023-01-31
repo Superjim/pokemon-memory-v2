@@ -1,6 +1,8 @@
 import React from "react";
+import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 
-function Header({ score, highScore, gameState }) {
+function Header({ score, highScore, gameState, auth, firebase, user }) {
   return (
     <div className="header">
       <h1>Pokemon Memory Game</h1>
@@ -16,6 +18,13 @@ function Header({ score, highScore, gameState }) {
 
       <span>
         <h3>High Score: {highScore}</h3>
+      </span>
+      <span>
+        {user ? (
+          <SignOut auth={auth} />
+        ) : (
+          <SignIn firebase={firebase} auth={auth} />
+        )}
       </span>
     </div>
   );
