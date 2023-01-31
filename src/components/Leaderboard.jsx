@@ -33,10 +33,8 @@ function Leaderboard({ firestore, auth, score, gameState }) {
   return (
     <div className="leaderboard-container">
       <h3>Top 10 Leaderboard</h3>
-      <button onClick={() => setOrderByScore(!orderByScore)}>
-        {orderByScore ? "Sort by Percent" : "Sort by Score"}
-      </button>
-      <table>
+
+      <table className="leaderboard-table">
         <thead>
           <tr>
             <th>User</th>
@@ -58,9 +56,13 @@ function Leaderboard({ firestore, auth, score, gameState }) {
             ))}
         </tbody>
       </table>
+      <button onClick={() => setOrderByScore(!orderByScore)}>
+        {orderByScore ? "Sort by Percent" : "Sort by Score"}
+      </button>
       {!submitted && (
-        <form onSubmit={submitScore}>
+        <form className="leaderboard-form" onSubmit={submitScore}>
           <input
+            required
             placeholder="Enter your name"
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
