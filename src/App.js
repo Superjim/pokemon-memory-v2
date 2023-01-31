@@ -3,13 +3,10 @@ import DifficultyContainer from "./components/DifficultyContainer";
 import PokemonCard from "./components/PokemonCard";
 import Header from "./components/Header";
 import Gameover from "./components/Gameover";
+
 import "./App.css";
 
-// import firebase from "firebase/app";
-// import "firebase/firestore";
-// import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Checkbox from "./Checkbox";
-import gen1 from "../images/gen1.png";
-import gen2 from "../images/gen2.png";
-import gen3 from "../images/gen3.png";
-import gen4 from "../images/gen4.png";
-import gen5 from "../images/gen5.png";
-import gen6 from "../images/gen6.png";
-import gen7 from "../images/gen7.png";
-import gen8 from "../images/gen8.png";
+import gen1 from "../images/gen1.jpg";
+import gen2 from "../images/gen2.jpg";
+import gen3 from "../images/gen3.jpg";
+import gen4 from "../images/gen4.jpg";
+import gen5 from "../images/gen5.jpg";
+import gen6 from "../images/gen6.jpg";
+import gen7 from "../images/gen7.jpg";
+import gen8 from "../images/gen8.jpg";
 
 function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
   //checkbox state
