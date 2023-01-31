@@ -44,7 +44,7 @@ function DifficultyContainer({ setGameData }) {
         setMaxDifficulty={setMaxDifficulty}
       />
       <h3>Difficulty: {userDifficulty} Pokemon</h3>
-      <label for="difficultyInput">
+      <label htmlFor="difficultyInput">
         Choose the amount of Pokemon with the slider below
       </label>
       <input

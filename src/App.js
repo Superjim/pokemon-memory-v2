@@ -3,9 +3,37 @@ import DifficultyContainer from "./components/DifficultyContainer";
 import PokemonCard from "./components/PokemonCard";
 import Header from "./components/Header";
 import Gameover from "./components/Gameover";
+import Leaderboard from "./components/Leaderboard";
+import SignIn from "./components/SignIn";
+import SignOut from "./components/SignOut";
 import "./App.css";
 
+// import firebase from "firebase/app";
+// import "firebase/firestore";
+// import "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/database";
+import "firebase/compat/storage";
+
+firebase.initializeApp({
+  apiKey: "AIzaSyBJjGN135MmiuGmJpqw4IpwHM4UWYPS-yo",
+  authDomain: "pokemon-game-4c3db.firebaseapp.com",
+  projectId: "pokemon-game-4c3db",
+  storageBucket: "pokemon-game-4c3db.appspot.com",
+  messagingSenderId: "927059662112",
+  appId: "1:927059662112:web:0e08557be437ac8dd6b345",
+});
 function App() {
+  //firebase
+  const auth = firebase.auth();
+  const firestore = firebase.firestore();
+  const [user] = useAuthState(auth);
+
   //game data states
   const [gameData, setGameData] = useState([]);
   const [gameState, setGameState] = useState([]);
@@ -84,6 +112,11 @@ function App() {
   if (loading) {
     return (
       <div className="App">
+        {user ? (
+          <SignOut auth={auth} />
+        ) : (
+          <SignIn firebase={firebase} auth={auth} />
+        )}
         <Header score={score} highScore={highScore} gameState={gameState} />
 
         <DifficultyContainer setGameData={setGameData} />
