@@ -5,7 +5,32 @@ import Header from "./components/Header";
 import Gameover from "./components/Gameover";
 import "./App.css";
 
+// import firebase from "firebase/app";
+// import "firebase/firestore";
+// import "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/database";
+import "firebase/compat/storage";
+
+firebase.initializeApp({
+  apiKey: "AIzaSyBJjGN135MmiuGmJpqw4IpwHM4UWYPS-yo",
+  authDomain: "pokemon-game-4c3db.firebaseapp.com",
+  projectId: "pokemon-game-4c3db",
+  storageBucket: "pokemon-game-4c3db.appspot.com",
+  messagingSenderId: "927059662112",
+  appId: "1:927059662112:web:0e08557be437ac8dd6b345",
+});
+
 function App() {
+  //firebase
+  const auth = firebase.auth();
+  const firestore = firebase.firestore();
+  const [user] = useAuthState(auth);
+
   //game data states
   const [gameData, setGameData] = useState([]);
   const [gameState, setGameState] = useState([]);
@@ -84,8 +109,14 @@ function App() {
   if (loading) {
     return (
       <div className="App">
-        <Header score={score} highScore={highScore} gameState={gameState} />
-
+        <Header
+          score={score}
+          highScore={highScore}
+          gameState={gameState}
+          firebase={firebase}
+          auth={auth}
+          user={user}
+        />
         <DifficultyContainer setGameData={setGameData} />
       </div>
     );
@@ -98,6 +129,9 @@ function App() {
           highScore={highScore}
           gameState={gameState}
           gameover={gameover}
+          firebase={firebase}
+          auth={auth}
+          user={user}
         />
         <div className="pokemon-container">
           {gameState.map((pokemon) => (
@@ -115,7 +149,14 @@ function App() {
   if (gameover) {
     return (
       <div className="App">
-        <Header score={score} highScore={highScore} gameState={gameState} />
+        <Header
+          score={score}
+          highScore={highScore}
+          gameState={gameState}
+          firebase={firebase}
+          auth={auth}
+          user={user}
+        />
         <Gameover
           score={score}
           clicked={clicked}
@@ -123,6 +164,8 @@ function App() {
           newGame={newGame}
           page={page}
           setPage={setPage}
+          firestore={firestore}
+          auth={auth}
         />
       </div>
     );
