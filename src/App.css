@@ -271,3 +271,27 @@ how to remove the virtical space around the range input in IE*/
     /*Edge starts the margin from the thumb, not the track as other browsers do*/
   }
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .checkbox {
+    width: 70px;
+  }
+
+  .checkbox > img {
+    width: 70px;
+  }
+
+  .pokemon-card {
+    width: 80px;
+    height: 100px;
+  }
+
+  .pokemon-card > p {
+    margin: 0;
+  }
+
+  .pokemon-card > img {
+    width: 80px;
+  }
+}
