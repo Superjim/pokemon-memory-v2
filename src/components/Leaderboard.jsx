@@ -80,7 +80,7 @@ function Score({ key, user, score, possibleScore, percent }) {
       <td>{user}</td>
       <td>{score}</td>
       <td>{possibleScore}</td>
-      <td>{percent}%</td>
+      <td>{percent.toFixed(2)}%</td>
     </tr>
   );
 }
