@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GameContext } from "../contexts/GameContext";
 import CheckboxContainer from "./CheckboxContainer";
 
-function DifficultyContainer({ setGameData, generation, setGeneration }) {
+function DifficultyContainer() {
+  const { setGameData, generation, setGeneration } = useContext(GameContext);
   const [maxDifficulty, setMaxDifficulty] = useState(151);
   const [rangeDifficulty, setRangeDifficulty] = useState([[1, 151]]);
   const [userDifficulty, setUserDifficulty] = useState(10);

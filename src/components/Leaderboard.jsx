@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { GameContext } from "../contexts/GameContext";
 import SignIn from "./SignIn";
 
-function Leaderboard({
-  firebase,
-  firestore,
-  score,
-  gameState,
-  generation,
-  auth,
-}) {
+function Leaderboard({ firebase, firestore, auth }) {
+  const { score, gameState, generation } = useContext(GameContext);
+
   const [formValue, setFormValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [orderByScore, setOrderByScore] = useState(true);
@@ -85,6 +81,7 @@ function Leaderboard({
       <table className="leaderboard-table">
         <thead>
           <tr>
+            <th>Rank</th>
             <th>User</th>
             <th>Score</th>
             <th>Possible Score</th>
@@ -96,6 +93,7 @@ function Leaderboard({
             scores.map((score, index) => (
               <Score
                 key={index}
+                position={index}
                 user={score.user}
                 score={score.score}
                 possibleScore={score.possibleScore}
@@ -137,9 +135,10 @@ function Leaderboard({
   );
 }
 
-function Score({ user, score, possibleScore, percent }) {
+function Score({ position, user, score, possibleScore, percent }) {
   return (
     <tr>
+      <td>{position + 1}</td>
       <td>{user}</td>
       <td>{score}</td>
       <td>{possibleScore}</td>

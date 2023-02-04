@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import DifficultyContainer from "./components/DifficultyContainer";
 import PokemonCard from "./components/PokemonCard";
 import Header from "./components/Header";
 import Gameover from "./components/Gameover";
-
 import "./App.css";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +11,8 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/database";
 import "firebase/compat/storage";
+
+import { GameContext } from "./contexts/GameContext";
 
 firebase.initializeApp({
   apiKey: "AIzaSyBJjGN135MmiuGmJpqw4IpwHM4UWYPS-yo",
@@ -28,57 +29,16 @@ function App() {
   const firestore = firebase.firestore();
   const [user] = useAuthState(auth);
 
-  //game data states
-  const [gameData, setGameData] = useState([]);
-  const [gameState, setGameState] = useState([]);
-  const [clicked, setClicked] = useState([]);
-  const [generation, setGeneration] = useState("Generation 1");
-
-  //score states
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
-
-  //game render states
-  const [loading, setLoading] = useState(true);
-  const [gameover, setGameover] = useState(false);
-  const [page, setPage] = useState(1);
-
-  function shufflePokemon() {
-    const shuffled = [...gameState];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    setGameState(shuffled);
-  }
-
-  function handleCheck(pokemon) {
-    //lose condition: if user clicks same pokemon twice
-    if (clicked.includes(pokemon)) {
-      setClicked([...clicked, pokemon]);
-      if (score > highScore) setHighScore(score);
-      setGameover(true);
-    } else {
-      setClicked([...clicked, pokemon]);
-      shufflePokemon();
-      setScore(score + 1);
-
-      // win condition
-      if (clicked.length === gameData.length - 1 && gameData.length !== 0) {
-        setGameover(true);
-        setPage(5);
-        if (score + 1 > highScore) setHighScore(score + 1);
-      }
-    }
-  }
-
-  function newGame() {
-    setLoading(true);
-    setScore(0);
-    setGameover(false);
-    setClicked([]);
-    setPage(1);
-  }
+  //gameData
+  const {
+    gameData,
+    gameState,
+    setGameState,
+    loading,
+    setLoading,
+    gameover,
+    handleCheck,
+  } = useContext(GameContext);
 
   useEffect(() => {
     function getPokemonData() {
@@ -107,40 +67,20 @@ function App() {
   if (loading) {
     return (
       <div className="App">
-        <Header
-          score={score}
-          highScore={highScore}
-          gameState={gameState}
-          firebase={firebase}
-          auth={auth}
-          user={user}
-        />
-        <DifficultyContainer
-          setGameData={setGameData}
-          setGeneration={setGeneration}
-          generation={generation}
-        />
+        <Header firebase={firebase} auth={auth} user={user} />
+        <DifficultyContainer />
       </div>
     );
   }
   if (!loading && !gameover) {
     return (
       <div className="App">
-        <Header
-          score={score}
-          highScore={highScore}
-          gameState={gameState}
-          gameover={gameover}
-          firebase={firebase}
-          auth={auth}
-          user={user}
-        />
+        <Header firebase={firebase} auth={auth} user={user} />
         <div className="pokemon-container">
-          {gameState.map((pokemon) => (
+          {gameState.map((pokemon, index) => (
             <PokemonCard
-              key={`${pokemon.name}-${pokemon.index}`}
+              key={index}
               pokemon={pokemon}
-              type={pokemon.type}
               handleCheck={handleCheck}
             />
           ))}
@@ -151,26 +91,8 @@ function App() {
   if (gameover) {
     return (
       <div className="App">
-        <Header
-          score={score}
-          highScore={highScore}
-          gameState={gameState}
-          firebase={firebase}
-          auth={auth}
-          user={user}
-        />
-        <Gameover
-          score={score}
-          clicked={clicked}
-          gameState={gameState}
-          newGame={newGame}
-          page={page}
-          setPage={setPage}
-          firestore={firestore}
-          auth={auth}
-          generation={generation}
-          firebase={firebase}
-        />
+        <Header firebase={firebase} auth={auth} user={user} />
+        <Gameover firestore={firestore} auth={auth} firebase={firebase} />
       </div>
     );
   }

@@ -1,26 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GameContext } from "../contexts/GameContext";
 import Leaderboard from "./Leaderboard";
 import PokemonCard from "./PokemonCard";
 
-function Gameover({
-  score,
-  clicked,
-  gameState,
-  newGame,
-  page,
-  setPage,
-  firestore,
-  auth,
-  generation,
-  firebase,
-}) {
-  function nextPage() {
-    setPage(page + 1);
-  }
-
-  function prevPage() {
-    setPage(page - 1);
-  }
+function Gameover({ firestore, auth, firebase }) {
+  const { score, clicked, gameState, newGame, page, nextPage, prevPage } =
+    useContext(GameContext);
 
   if (page === 1) {
     return (
@@ -32,11 +17,7 @@ function Gameover({
         <div className="button-wrapper">
           <button disabled>Back</button>
           <PokemonCard
-            key={`${clicked[clicked.length - 1].name}-${
-              clicked[clicked.length - 1].index
-            }`}
             pokemon={clicked[clicked.length - 1]}
-            type={clicked[clicked.length - 1].type}
             handleCheck={nextPage}
           />
           <button onClick={nextPage}>Next</button>
@@ -51,11 +32,10 @@ function Gameover({
         <div className="button-wrapper">
           <button onClick={prevPage}>Back</button>
           <div className="pokemon-container">
-            {clicked.slice(0, -1).map((pokemon) => (
+            {clicked.slice(0, -1).map((pokemon, index) => (
               <PokemonCard
-                key={`${pokemon.name}-${pokemon.index}`}
+                key={index}
                 pokemon={pokemon}
-                type={pokemon.type}
                 handleCheck={nextPage}
               />
             ))}
@@ -74,11 +54,10 @@ function Gameover({
           <div className="pokemon-container">
             {gameState
               .filter((x) => !clicked.includes(x))
-              .map((pokemon) => (
+              .map((pokemon, index) => (
                 <PokemonCard
-                  key={`${pokemon.name}-${pokemon.index}`}
+                  key={index}
                   pokemon={pokemon}
-                  type={pokemon.type}
                   handleCheck={nextPage}
                 />
               ))}
@@ -92,14 +71,7 @@ function Gameover({
     return (
       <div className="container-wrapper">
         <h3>Game Over!</h3>
-        <Leaderboard
-          firebase={firebase}
-          firestore={firestore}
-          auth={auth}
-          score={score}
-          gameState={gameState}
-          generation={generation}
-        />
+        <Leaderboard firebase={firebase} firestore={firestore} auth={auth} />
         <button onClick={newGame}>Play Again</button>
       </div>
     );
@@ -114,11 +86,10 @@ function Gameover({
         <div className="button-wrapper">
           <button disabled>Back</button>
           <div className="pokemon-container">
-            {gameState.map((pokemon) => (
+            {gameState.map((pokemon, index) => (
               <PokemonCard
-                key={`${pokemon.name}-${pokemon.index}`}
+                key={index}
                 pokemon={pokemon}
-                type={pokemon.type}
                 handleCheck={prevPage}
               />
             ))}
