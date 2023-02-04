@@ -32,6 +32,7 @@ function App() {
   const [gameData, setGameData] = useState([]);
   const [gameState, setGameState] = useState([]);
   const [clicked, setClicked] = useState([]);
+  const [generation, setGeneration] = useState("1");
 
   //score states
   const [score, setScore] = useState(0);
@@ -114,7 +115,11 @@ function App() {
           auth={auth}
           user={user}
         />
-        <DifficultyContainer setGameData={setGameData} />
+        <DifficultyContainer
+          setGameData={setGameData}
+          setGeneration={setGeneration}
+          generation={generation}
+        />
       </div>
     );
   }

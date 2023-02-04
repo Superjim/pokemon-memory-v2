@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CheckboxContainer from "./CheckboxContainer";
 
-function DifficultyContainer({ setGameData }) {
+function DifficultyContainer({ setGameData, generation, setGeneration }) {
   const [maxDifficulty, setMaxDifficulty] = useState(151);
   const [rangeDifficulty, setRangeDifficulty] = useState([[1, 151]]);
   const [userDifficulty, setUserDifficulty] = useState(10);
@@ -42,7 +42,14 @@ function DifficultyContainer({ setGameData }) {
       <CheckboxContainer
         setRangeDifficulty={setRangeDifficulty}
         setMaxDifficulty={setMaxDifficulty}
+        generation={generation}
+        setGeneration={setGeneration}
       />
+      {generation === "None" ? (
+        <h3>Please select atleast one generation</h3>
+      ) : (
+        <h3>Leaderboard Category: {generation}</h3>
+      )}
       <h3>Difficulty: {userDifficulty} Pokemon</h3>
       <label htmlFor="difficultyInput">
         Choose the amount of Pokemon with the slider below
