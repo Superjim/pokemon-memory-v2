@@ -47,7 +47,6 @@ function DifficultyContainer() {
       ) : (
         <h3>Leaderboard Category: {generation}</h3>
       )}
-      <h3>Difficulty: {userDifficulty} Pokemon</h3>
       <div className="button-container-diff">
         <button
           style={{ color: "black", backgroundColor: "green", fontWeight: 600 }}
@@ -77,6 +76,7 @@ function DifficultyContainer() {
       </div>
       {customInput && (
         <div className="custom-input-container">
+          <h3>Difficulty: {userDifficulty} Pokemon</h3>
           <label>
             Choose the amount of Pokemon with the slider below
             <input
