@@ -27,18 +27,26 @@ function Leaderboard({ firebase, firestore, auth }) {
   ];
 
   let query = "";
+
   if (orderByScore) {
     query = scoresRef
       .where("generation", "==", leaderboardGeneration)
       .orderBy("score", "desc")
+      .orderBy("percent", "desc")
       .limit(10);
   } else {
     query = scoresRef
       .where("generation", "==", leaderboardGeneration)
       .orderBy("percent", "desc")
+      .orderBy("score", "desc")
       .limit(10);
   }
-  const [scores] = useCollectionData(query, { idField: "id" });
+
+  const [scores, error] = useCollectionData(query, { idField: "id" });
+
+  if (error) {
+    console.error(error);
+  }
 
   const submitScore = async (e) => {
     e.preventDefault();
@@ -67,7 +75,7 @@ function Leaderboard({ firebase, firestore, auth }) {
   return (
     <div className="leaderboard-container">
       <h3>Top 10 Leaderboard</h3>{" "}
-      <div>
+      <div className="button-container-ldr">
         {buttonGenerationList.map((gen) => (
           <button
             key={gen}
@@ -84,7 +92,7 @@ function Leaderboard({ firebase, firestore, auth }) {
             <th>Rank</th>
             <th>User</th>
             <th>Score</th>
-            <th>Possible Score</th>
+            <th className="possible-score">Possible Score</th>
             <th>Percent</th>
           </tr>
         </thead>
@@ -141,7 +149,7 @@ function Score({ position, user, score, possibleScore, percent }) {
       <td>{position + 1}</td>
       <td>{user}</td>
       <td>{score}</td>
-      <td>{possibleScore}</td>
+      <td className="possible-score">{possibleScore}</td>
       <td>{percent.toFixed(2)}%</td>
     </tr>
   );
