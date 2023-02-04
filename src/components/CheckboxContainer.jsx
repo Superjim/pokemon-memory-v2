@@ -93,70 +93,74 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
 
   return (
     <div className="checkbox-container">
-      <Checkbox
-        label="Generation 1"
-        id="generation1"
-        range="(1 - 151)"
-        image={gen1}
-        checked={generation1}
-        onChange={() => setGeneration1(!generation1)}
-      />
-      <Checkbox
-        label="Generation 2"
-        id="generation2"
-        range="(152 - 251)"
-        image={gen2}
-        checked={generation2}
-        onChange={() => setGeneration2(!generation2)}
-      />
-      <Checkbox
-        label="Generation 3"
-        id="generation3"
-        range="(252 - 386)"
-        image={gen3}
-        checked={generation3}
-        onChange={() => setGeneration3(!generation3)}
-      />
-      <Checkbox
-        label="Generation 4"
-        id="generation4"
-        range="(387 - 493)"
-        image={gen4}
-        checked={generation4}
-        onChange={() => setGeneration4(!generation4)}
-      />
-      <Checkbox
-        label="Generation 5"
-        id="generation5"
-        range="(494 - 649)"
-        image={gen5}
-        checked={generation5}
-        onChange={() => setGeneration5(!generation5)}
-      />
-      <Checkbox
-        label="Generation 6"
-        id="generation6"
-        range="(650 - 721)"
-        image={gen6}
-        checked={generation6}
-        onChange={() => setGeneration6(!generation6)}
-      />
-      <Checkbox
-        label="Generation 7"
-        id="generation7"
-        range="(722 - 809)"
-        image={gen7}
-        checked={generation7}
-        onChange={() => setGeneration7(!generation7)}
-      />
-      <Checkbox
-        label="Generation 8"
-        id="generation8"
-        range="(810 - 905)"
-        image={gen8}
-        checked={generation8}
-        onChange={() => setGeneration8(!generation8)}
-      />
+      <div className="checkbox-as4 padding-bottom">
+        <Checkbox
+          label="Generation 1"
+          id="generation1"
+          range="(1 - 151)"
+          image={gen1}
+          checked={generation1}
+          onChange={() => setGeneration1(!generation1)}
+        />
+        <Checkbox
+          label="Generation 2"
+          id="generation2"
+          range="(152 - 251)"
+          image={gen2}
+          checked={generation2}
+          onChange={() => setGeneration2(!generation2)}
+        />
+        <Checkbox
+          label="Generation 3"
+          id="generation3"
+          range="(252 - 386)"
+          image={gen3}
+          checked={generation3}
+          onChange={() => setGeneration3(!generation3)}
+        />
+        <Checkbox
+          label="Generation 4"
+          id="generation4"
+          range="(387 - 493)"
+          image={gen4}
+          checked={generation4}
+          onChange={() => setGeneration4(!generation4)}
+        />
+      </div>
+      <div className="checkbox-as4">
+        <Checkbox
+          label="Generation 5"
+          id="generation5"
+          range="(494 - 649)"
+          image={gen5}
+          checked={generation5}
+          onChange={() => setGeneration5(!generation5)}
+        />
+        <Checkbox
+          label="Generation 6"
+          id="generation6"
+          range="(650 - 721)"
+          image={gen6}
+          checked={generation6}
+          onChange={() => setGeneration6(!generation6)}
+        />
+        <Checkbox
+          label="Generation 7"
+          id="generation7"
+          range="(722 - 809)"
+          image={gen7}
+          checked={generation7}
+          onChange={() => setGeneration7(!generation7)}
+        />
+        <Checkbox
+          label="Generation 8"
+          id="generation8"
+          range="(810 - 905)"
+          image={gen8}
+          checked={generation8}
+          onChange={() => setGeneration8(!generation8)}
+        />
+      </div>
     </div>
   );
 }

@@ -6,7 +6,7 @@ function Checkbox({ label, id, range, image, checked, onChange }) {
       className="checkbox"
       onClick={onChange}
       style={{
-        border: checked ? "2px solid green" : "2px solid red",
+        border: checked ? "3px solid green" : "3px solid red",
       }}
     >
       {label}
