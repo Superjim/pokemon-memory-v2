@@ -32,7 +32,7 @@ function App() {
   const [gameData, setGameData] = useState([]);
   const [gameState, setGameState] = useState([]);
   const [clicked, setClicked] = useState([]);
-  const [generation, setGeneration] = useState("1");
+  const [generation, setGeneration] = useState("Generation 1");
 
   //score states
   const [score, setScore] = useState(0);
@@ -168,6 +168,7 @@ function App() {
           setPage={setPage}
           firestore={firestore}
           auth={auth}
+          generation={generation}
         />
       </div>
     );
