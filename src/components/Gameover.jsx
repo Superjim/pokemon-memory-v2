@@ -11,6 +11,7 @@ function Gameover({
   setPage,
   firestore,
   auth,
+  generation,
 }) {
   function nextPage() {
     setPage(page + 1);
@@ -96,6 +97,7 @@ function Gameover({
             auth={auth}
             score={score}
             gameState={gameState}
+            generation={generation}
           />
         ) : (
           <div className="gameover-container">

@@ -1,30 +1,72 @@
 import React, { useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-function Leaderboard({ firestore, auth, score, gameState }) {
+function Leaderboard({ firestore, score, gameState, generation }) {
   const [formValue, setFormValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [orderByScore, setOrderByScore] = useState(true);
+  const [leaderboardGeneration, setLeaderboardGeneration] =
+    useState("Generation 1");
+
   const scoresRef = firestore.collection("scores");
+
+  const buttonGenerationList = [
+    "Generation 1",
+    "Generation 2",
+    "Generation 3",
+    "Generation 4",
+    "Generation 5",
+    "Generation 6",
+    "Generation 7",
+    "Generation 8",
+    "Open",
+  ];
+
   let query = "";
   if (orderByScore) {
-    query = scoresRef.orderBy("score", "desc").limit(10);
+    query = scoresRef
+      .where("generation", "==", leaderboardGeneration)
+      .orderBy("score", "desc")
+      .limit(10);
   } else {
-    query = scoresRef.orderBy("percent", "desc").limit(10);
+    query = scoresRef
+      .where("generation", "==", leaderboardGeneration)
+      .orderBy("percent", "desc")
+      .limit(10);
   }
-  const [scores] = useCollectionData(query, { idField: "id" });
+  const [scores, loading, error] = useCollectionData(query, { idField: "id" });
+
+  if (error) {
+    try {
+      console.error(error);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const submitScore = async (e) => {
     e.preventDefault();
     const length = gameState.length;
     const percent = (score / length) * 100;
 
-    await scoresRef.add({
-      user: formValue,
-      score: score,
-      possibleScore: length,
-      percent: percent,
-    });
+    try {
+      await scoresRef.add({
+        user: formValue,
+        score: score,
+        possibleScore: length,
+        percent: percent,
+        generation: generation,
+      });
+
+      setFormValue("");
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    }
 
     setFormValue("");
     setSubmitted(true);
@@ -32,8 +74,18 @@ function Leaderboard({ firestore, auth, score, gameState }) {
 
   return (
     <div className="leaderboard-container">
-      <h3>Top 10 Leaderboard</h3>
-
+      <h3>Top 10 Leaderboard</h3>{" "}
+      <div>
+        {buttonGenerationList.map((gen) => (
+          <button
+            key={gen}
+            className={gen === leaderboardGeneration ? "selected" : ""}
+            onClick={() => setLeaderboardGeneration(gen)}
+          >
+            {gen.replace("Generation ", "Gen ")}
+          </button>
+        ))}
+      </div>
       <table className="leaderboard-table">
         <thead>
           <tr>
