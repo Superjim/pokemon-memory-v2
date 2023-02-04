@@ -9,7 +9,11 @@ import gen6 from "../images/gen6.jpg";
 import gen7 from "../images/gen7.jpg";
 import gen8 from "../images/gen8.jpg";
 
-function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
+function CheckboxContainer({
+  setRangeDifficulty,
+  setMaxDifficulty,
+  setGeneration,
+}) {
   //checkbox state
   const [generation1, setGeneration1] = useState(true);
   const [generation2, setGeneration2] = useState(false);
@@ -52,11 +56,32 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
       return total;
     }
 
+    function handleGenerationChange() {
+      let gen = "";
+
+      if (generation1) gen += "1";
+      if (generation2) gen += "2";
+      if (generation3) gen += "3";
+      if (generation4) gen += "4";
+      if (generation5) gen += "5";
+      if (generation6) gen += "6";
+      if (generation7) gen += "7";
+      if (generation8) gen += "8";
+
+      if (gen.length === 1) {
+        setGeneration("Generation " + gen);
+      } else if (gen.length > 1) {
+        setGeneration("Open");
+      } else {
+        setGeneration("None");
+      }
+    }
     const ranges = createRangeArray();
     const total = calculateMaxDifficulty();
 
     setRangeDifficulty(ranges);
     setMaxDifficulty(total);
+    handleGenerationChange();
   }, [
     generation1,
     generation2,
@@ -134,6 +159,7 @@ function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
         checked={generation8}
         onChange={() => setGeneration8(!generation8)}
       />
+      <h3>Selected Generation: {}</h3>
     </div>
   );
 }
