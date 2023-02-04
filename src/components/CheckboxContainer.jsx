@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GameContext } from "../contexts/GameContext";
 import Checkbox from "./Checkbox";
 import gen1 from "../images/gen1.jpg";
 import gen2 from "../images/gen2.jpg";
@@ -9,11 +10,8 @@ import gen6 from "../images/gen6.jpg";
 import gen7 from "../images/gen7.jpg";
 import gen8 from "../images/gen8.jpg";
 
-function CheckboxContainer({
-  setRangeDifficulty,
-  setMaxDifficulty,
-  setGeneration,
-}) {
+function CheckboxContainer({ setRangeDifficulty, setMaxDifficulty }) {
+  const { setGeneration } = useContext(GameContext);
   //checkbox state
   const [generation1, setGeneration1] = useState(true);
   const [generation2, setGeneration2] = useState(false);

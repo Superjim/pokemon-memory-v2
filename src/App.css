@@ -161,7 +161,7 @@ button[disabled] {
 .leaderboard-table thead tr {
   background-color: #0d6efd;
   color: #ffffff;
-  text-align: left;
+  text-align: center;
 }
 
 .leaderboard-table th,

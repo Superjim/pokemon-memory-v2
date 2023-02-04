@@ -6,6 +6,7 @@ function PokemonCard({ pokemon, handleCheck }) {
   const handleClick = () => {
     handleCheck(pokemon);
   };
+
   return (
     <div className={type} onClick={handleClick}>
       <img src={pokemon.image} alt={pokemon.name}></img>

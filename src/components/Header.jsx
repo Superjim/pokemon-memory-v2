@@ -1,8 +1,12 @@
 import React from "react";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
+import { useContext } from "react";
+import { GameContext } from "../contexts/GameContext";
 
-function Header({ score, highScore, gameState, auth, firebase, user }) {
+function Header({ auth, firebase, user }) {
+  const { score, highScore, gameState } = useContext(GameContext);
+
   return (
     <div className="header">
       <h1>Pokemon Memory Game</h1>
