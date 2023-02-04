@@ -107,7 +107,7 @@ function Leaderboard({
       <button onClick={() => setOrderByScore(!orderByScore)}>
         {orderByScore ? "Sort by Percent" : "Sort by Score"}
       </button>
-      {!submitted && auth.currentUser ? (
+      {!submitted ? (
         <form className="leaderboard-form" onSubmit={submitScore}>
           <input
             required
@@ -115,12 +115,22 @@ function Leaderboard({
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
           />
-          <button type="submit">Add Score</button>
+          {auth.currentUser ? (
+            <button type="submit">Add Score</button>
+          ) : (
+            <>
+              <button className="disabled" disabled>
+                Add Score
+              </button>
+            </>
+          )}
         </form>
       ) : (
+        <p>Thank you for adding your score</p>
+      )}
+      {!auth.currentUser && (
         <p>
           You must <SignIn firebase={firebase} auth={auth} /> to add your score
-          the leaderboard
         </p>
       )}
     </div>
