@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import SignIn from "./SignIn";
 
-function Leaderboard({ firestore, score, gameState, generation }) {
+function Leaderboard({
+  firebase,
+  firestore,
+  score,
+  gameState,
+  generation,
+  auth,
+}) {
   const [formValue, setFormValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [orderByScore, setOrderByScore] = useState(true);
@@ -34,19 +42,7 @@ function Leaderboard({ firestore, score, gameState, generation }) {
       .orderBy("percent", "desc")
       .limit(10);
   }
-  const [scores, loading, error] = useCollectionData(query, { idField: "id" });
-
-  if (error) {
-    try {
-      console.error(error);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const [scores] = useCollectionData(query, { idField: "id" });
 
   const submitScore = async (e) => {
     e.preventDefault();
@@ -97,9 +93,9 @@ function Leaderboard({ firestore, score, gameState, generation }) {
         </thead>
         <tbody>
           {scores &&
-            scores.map((score) => (
+            scores.map((score, index) => (
               <Score
-                key={score.id}
+                key={index}
                 user={score.user}
                 score={score.score}
                 possibleScore={score.possibleScore}
@@ -111,7 +107,7 @@ function Leaderboard({ firestore, score, gameState, generation }) {
       <button onClick={() => setOrderByScore(!orderByScore)}>
         {orderByScore ? "Sort by Percent" : "Sort by Score"}
       </button>
-      {!submitted && (
+      {!submitted && auth.currentUser ? (
         <form className="leaderboard-form" onSubmit={submitScore}>
           <input
             required
@@ -121,14 +117,19 @@ function Leaderboard({ firestore, score, gameState, generation }) {
           />
           <button type="submit">Add Score</button>
         </form>
+      ) : (
+        <p>
+          You must <SignIn firebase={firebase} auth={auth} /> to add your score
+          the leaderboard
+        </p>
       )}
     </div>
   );
 }
 
-function Score({ key, user, score, possibleScore, percent }) {
+function Score({ user, score, possibleScore, percent }) {
   return (
-    <tr key={key}>
+    <tr>
       <td>{user}</td>
       <td>{score}</td>
       <td>{possibleScore}</td>

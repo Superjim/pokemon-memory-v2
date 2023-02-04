@@ -169,6 +169,7 @@ function App() {
           firestore={firestore}
           auth={auth}
           generation={generation}
+          firebase={firebase}
         />
       </div>
     );
