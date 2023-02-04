@@ -12,6 +12,7 @@ function Gameover({
   firestore,
   auth,
   generation,
+  firebase,
 }) {
   function nextPage() {
     setPage(page + 1);
@@ -91,28 +92,14 @@ function Gameover({
     return (
       <div className="container-wrapper">
         <h3>Game Over!</h3>
-        {auth.currentUser ? (
-          <Leaderboard
-            firestore={firestore}
-            auth={auth}
-            score={score}
-            gameState={gameState}
-            generation={generation}
-          />
-        ) : (
-          <div className="gameover-container">
-            <p>You must be logged in to view the leaderboard</p>
-            <PokemonCard
-              key={`${clicked[clicked.length - 1].name}-${
-                clicked[clicked.length - 1].index
-              }`}
-              pokemon={clicked[clicked.length - 1]}
-              type={clicked[clicked.length - 1].type}
-              handleCheck={newGame}
-            />
-          </div>
-        )}
-
+        <Leaderboard
+          firebase={firebase}
+          firestore={firestore}
+          auth={auth}
+          score={score}
+          gameState={gameState}
+          generation={generation}
+        />
         <button onClick={newGame}>Play Again</button>
       </div>
     );
