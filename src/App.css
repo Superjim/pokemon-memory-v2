@@ -299,6 +299,14 @@ input[type="range"] {
   margin: 15px 0;
 }
 
+.option-container-ldr {
+  display: none;
+}
+
+.button-container-ldr {
+  display: block;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .checkbox {
@@ -325,7 +333,7 @@ input[type="range"] {
   .leaderboard-table {
     border-collapse: collapse;
     margin: 0;
-    min-width: 400px;
+    min-width: 300px;
   }
 
   .leaderboard-table thead tr {
@@ -352,6 +360,14 @@ input[type="range"] {
   }
 
   .possible-score {
+    display: none;
+  }
+
+  .option-container-ldr {
+    display: block;
+  }
+
+  .button-container-ldr {
     display: none;
   }
 }

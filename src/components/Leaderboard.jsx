@@ -74,7 +74,18 @@ function Leaderboard({ firebase, firestore, auth }) {
 
   return (
     <div className="leaderboard-container">
-      <h3>Top 10 Leaderboard</h3>{" "}
+      <h3>Top 10 Leaderboard</h3>
+      <div className="option-container-ldr">
+        <select
+          onChange={(event) => setLeaderboardGeneration(event.target.value)}
+        >
+          {buttonGenerationList.map((gen) => (
+            <option key={gen} value={gen}>
+              {gen}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="button-container-ldr">
         {buttonGenerationList.map((gen) => (
           <button
