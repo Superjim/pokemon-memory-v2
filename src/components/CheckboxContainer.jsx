@@ -159,7 +159,6 @@ function CheckboxContainer({
         checked={generation8}
         onChange={() => setGeneration8(!generation8)}
       />
-      <h3>Selected Generation: {}</h3>
     </div>
   );
 }

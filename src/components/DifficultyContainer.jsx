@@ -68,9 +68,6 @@ function DifficultyContainer({ setGameData, generation, setGeneration }) {
         Get points by clicking on a Pokemon, but don't click on one more than
         once!
       </p>
-      {rangeDifficulty.length === 0 && (
-        <h3>Please select atleast one generation of Pokemon</h3>
-      )}
       {userDifficulty < 2 ? (
         <button disabled>
           Please select at least difficulty level 2 to start the game
