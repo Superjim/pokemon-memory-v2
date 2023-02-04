@@ -6,7 +6,7 @@ function Leaderboard({ firestore, score, gameState, generation }) {
   const [submitted, setSubmitted] = useState(false);
   const [orderByScore, setOrderByScore] = useState(true);
   const [leaderboardGeneration, setLeaderboardGeneration] =
-    useState("Generation 1");
+    useState(generation);
 
   const scoresRef = firestore.collection("scores");
 
