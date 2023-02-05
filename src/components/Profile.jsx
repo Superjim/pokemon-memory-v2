@@ -2,7 +2,7 @@ import React from "react";
 import SignOut from "./SignOut";
 
 function Profile({ user, auth }) {
-  const uid = user.providerData[0].uid;
+  //const uid = user.providerData[0].uid;
 
   return (
     <div className="profile-container">

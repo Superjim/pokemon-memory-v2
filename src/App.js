@@ -77,7 +77,7 @@ function App() {
     return (
       <div className="App">
         <Header firebase={firebase} auth={auth} user={user} />
-        <div className="difficulty-container">
+        <div className="container-wrapper">
           <div className="pokemon-container box-shadow">
             {gameState.map((pokemon, index) => (
               <PokemonCard
