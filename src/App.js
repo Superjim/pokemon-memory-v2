@@ -3,6 +3,7 @@ import DifficultyContainer from "./components/DifficultyContainer";
 import PokemonCard from "./components/PokemonCard";
 import Header from "./components/Header";
 import Gameover from "./components/Gameover";
+import Score from "./components/Score";
 import "./App.css";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -76,14 +77,17 @@ function App() {
     return (
       <div className="App">
         <Header firebase={firebase} auth={auth} user={user} />
-        <div className="pokemon-container box-shadow">
-          {gameState.map((pokemon, index) => (
-            <PokemonCard
-              key={index}
-              pokemon={pokemon}
-              handleCheck={handleCheck}
-            />
-          ))}
+        <div className="difficulty-container">
+          <div className="pokemon-container box-shadow">
+            {gameState.map((pokemon, index) => (
+              <PokemonCard
+                key={index}
+                pokemon={pokemon}
+                handleCheck={handleCheck}
+              />
+            ))}
+          </div>
+          <Score />
         </div>
       </div>
     );
