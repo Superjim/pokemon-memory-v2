@@ -97,33 +97,36 @@ function Leaderboard({ firebase, firestore, auth }) {
           </button>
         ))}
       </div>
-      <table className="leaderboard-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>User</th>
-            <th>Score</th>
-            <th className="possible-score">Possible Score</th>
-            <th>Percent</th>
-          </tr>
-        </thead>
-        <tbody>
-          {scores &&
-            scores.map((score, index) => (
-              <Score
-                key={index}
-                position={index}
-                user={score.user}
-                score={score.score}
-                possibleScore={score.possibleScore}
-                percent={score.percent}
-              />
-            ))}
-        </tbody>
-      </table>
-      <button onClick={() => setOrderByScore(!orderByScore)}>
-        {orderByScore ? "Sort by Percent" : "Sort by Score"}
-      </button>
+      <div className="table-container">
+        <button onClick={() => setOrderByScore(!orderByScore)}>
+          {orderByScore ? "Sort by Percent" : "Sort by Score"}
+        </button>
+        <table className="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>User</th>
+              <th>Score</th>
+              <th className="possible-score">Possible Score</th>
+              <th>Percent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scores &&
+              scores.map((score, index) => (
+                <Score
+                  key={index}
+                  position={index}
+                  user={score.user}
+                  score={score.score}
+                  possibleScore={score.possibleScore}
+                  percent={score.percent}
+                />
+              ))}
+          </tbody>
+        </table>
+      </div>
+
       {!submitted ? (
         <form className="leaderboard-form" onSubmit={submitScore}>
           <input

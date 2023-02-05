@@ -68,7 +68,7 @@ function DifficultyContainer() {
         </button>
         <button
           className={customInput ? "selected" : ""}
-          style={{ backgroundColor: "grey", fontWeight: 600 }}
+          style={{ color: "black", backgroundColor: "grey", fontWeight: 600 }}
           onClick={() => setCustomInput(true)}
         >
           Custom
@@ -92,8 +92,8 @@ function DifficultyContainer() {
         </div>
       )}
       <p>
-        Get points by clicking on a Pokemon, but don't click on one more than
-        once!
+        Get points by clicking on a Pokemon, but don't click on the same one
+        more than once!
       </p>
       {customInput && (
         <div>

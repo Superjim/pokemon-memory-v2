@@ -70,7 +70,6 @@ function Gameover({ firestore, auth, firebase }) {
   if (page === 4) {
     return (
       <div className="container-wrapper">
-        <h3>Game Over!</h3>
         <Leaderboard firebase={firebase} firestore={firestore} auth={auth} />
         <button onClick={newGame}>Play Again</button>
       </div>
