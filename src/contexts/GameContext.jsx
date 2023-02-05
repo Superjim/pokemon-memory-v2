@@ -24,8 +24,8 @@ const GameProvider = (props) => {
       "--text": "black",
     },
     pikachu: {
-      "--primary": "#f6e652",
-      "--secondary": "#de9400",
+      "--primary": "#de9400",
+      "--secondary": "#f6e652",
       "--other": "#e65a41",
       "--text": "#292929",
     },
@@ -79,8 +79,8 @@ const GameProvider = (props) => {
     },
     mew: {
       "--primary": "#5a2952",
-      "--secondary": "#83acf6",
-      "--other": "#ee83b4",
+      "--secondary": "#ee83b4",
+      "--other": "#83acf6",
       "--text": "black",
     },
   };
