@@ -81,7 +81,7 @@ const GameProvider = (props) => {
       "--primary": "#5a2952",
       "--secondary": "#ee83b4",
       "--other": "#83acf6",
-      "--text": "black",
+      "--text": "white",
     },
   };
 

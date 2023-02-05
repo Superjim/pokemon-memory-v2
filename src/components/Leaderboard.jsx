@@ -3,10 +3,9 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { GameContext } from "../contexts/GameContext";
 import SignIn from "./SignIn";
 
-function Leaderboard({ firebase, firestore, auth }) {
-  const { score, gameState, generation } = useContext(GameContext);
+function Leaderboard({ firebase, firestore, auth, user }) {
+  const { score, gameState, generation, newGame } = useContext(GameContext);
 
-  const [formValue, setFormValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [orderByScore, setOrderByScore] = useState(true);
   const [leaderboardGeneration, setLeaderboardGeneration] =
@@ -55,20 +54,18 @@ function Leaderboard({ firebase, firestore, auth }) {
 
     try {
       await scoresRef.add({
-        user: formValue,
+        user: user.providerData[0].displayName,
         score: score,
         possibleScore: length,
         percent: percent,
         generation: generation,
       });
 
-      setFormValue("");
       setSubmitted(true);
     } catch (error) {
       console.error(error);
     }
 
-    setFormValue("");
     setSubmitted(true);
   };
 
@@ -126,32 +123,20 @@ function Leaderboard({ firebase, firestore, auth }) {
           </tbody>
         </table>
       </div>
-
-      {!submitted ? (
-        <form className="leaderboard-form" onSubmit={submitScore}>
-          <input
-            required
-            placeholder="Enter your name"
-            value={formValue}
-            onChange={(e) => setFormValue(e.target.value)}
-          />
-          {auth.currentUser ? (
-            <button type="submit">Add Score</button>
-          ) : (
-            <>
-              <button className="disabled" disabled>
-                Add Score
-              </button>
-            </>
-          )}
-        </form>
-      ) : (
-        <p>Thank you for adding your score</p>
-      )}
       {!auth.currentUser && (
-        <p>
-          You must <SignIn firebase={firebase} auth={auth} /> to add your score
-        </p>
+        <div className="sign-in-leaderboard">
+          <SignIn firebase={firebase} auth={auth} /> <h4> to add your score</h4>
+        </div>
+      )}
+      {!submitted && auth.currentUser ? (
+        <div className="sign-in-leaderboard">
+          <button onClick={submitScore}>Add Score</button>
+          <button onClick={newGame}>Play Again</button>
+        </div>
+      ) : (
+        <div className="sign-in-leaderboard">
+          <button onClick={newGame}>Play Again</button>
+        </div>
       )}
     </div>
   );

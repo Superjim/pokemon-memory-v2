@@ -3,8 +3,8 @@ import { GameContext } from "../contexts/GameContext";
 import Leaderboard from "./Leaderboard";
 import PokemonCard from "./PokemonCard";
 
-function Gameover({ firestore, auth, firebase }) {
-  const { score, clicked, gameState, newGame, page, nextPage, prevPage } =
+function Gameover({ firestore, auth, firebase, user }) {
+  const { score, clicked, gameState, page, nextPage, prevPage } =
     useContext(GameContext);
 
   if (page === 1) {
@@ -70,8 +70,12 @@ function Gameover({ firestore, auth, firebase }) {
   if (page === 4) {
     return (
       <div className="container-wrapper">
-        <Leaderboard firebase={firebase} firestore={firestore} auth={auth} />
-        <button onClick={newGame}>Play Again</button>
+        <Leaderboard
+          firebase={firebase}
+          firestore={firestore}
+          auth={auth}
+          user={user}
+        />
       </div>
     );
   }

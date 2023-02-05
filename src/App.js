@@ -96,7 +96,12 @@ function App() {
     return (
       <div className="App">
         <Header firebase={firebase} auth={auth} user={user} />
-        <Gameover firestore={firestore} auth={auth} firebase={firebase} />
+        <Gameover
+          firestore={firestore}
+          auth={auth}
+          firebase={firebase}
+          user={user}
+        />
       </div>
     );
   }

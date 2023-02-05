@@ -295,6 +295,21 @@ input[type="range"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.profile-container > img {
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+}
+
 .pokemon-card {
   text-align: center;
   display: flex;
@@ -343,6 +358,13 @@ button:hover {
   width: 5rem;
   background-color: var(--other);
   color: black;
+}
+
+.sign-out-button {
+  height: 2rem;
+  width: 5rem;
+  color: black;
+  background-color: var(--other);
 }
 
 .table-container {
@@ -413,10 +435,23 @@ button:hover {
   margin: 0;
 }
 
+.sign-in-leaderboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .leaderboard-container > p > button,
 .leaderboard-form > button,
 .container-wrapper > button {
   height: 2rem;
+  background-color: var(--other);
+  color: black;
+}
+
+.sign-in-leaderboard > button {
   background-color: var(--other);
   color: black;
 }
