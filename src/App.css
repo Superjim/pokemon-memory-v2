@@ -462,6 +462,10 @@ button:hover {
   font-size: 1.2rem;
 }
 
+.sign-out-button {
+  height: 3rem;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .checkbox {

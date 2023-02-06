@@ -45,7 +45,7 @@ const GameProvider = (props) => {
       "--primary": "#105241",
       "--secondary": "#5a9c39",
       "--other": "#ff7b73",
-      "--text": "black",
+      "--text": "white",
     },
     clefairy: {
       "--primary": "#ffacac",
