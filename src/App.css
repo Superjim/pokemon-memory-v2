@@ -380,6 +380,7 @@ button:hover {
 
 .table-container > button {
   height: 2rem;
+  width: 10rem;
 }
 
 .leaderboard-container {
