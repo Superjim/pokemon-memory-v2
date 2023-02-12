@@ -9,7 +9,8 @@ function Theme() {
   }, [theme]);
 
   return (
-    <div>
+    <div className="theme-container">
+      <h4>Choose Theme:</h4>
       <select value={theme} onChange={(e) => setTheme(e.target.value)}>
         <option value="gyrados">Mr. Mime</option>
         <option value="syther">Syther</option>
