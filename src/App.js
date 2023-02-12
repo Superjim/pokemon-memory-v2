@@ -14,6 +14,7 @@ import "firebase/compat/database";
 import "firebase/compat/storage";
 
 import { GameContext } from "./contexts/GameContext";
+import Footer from "./components/Footer";
 
 firebase.initializeApp({
   apiKey: "AIzaSyBJjGN135MmiuGmJpqw4IpwHM4UWYPS-yo",
@@ -70,6 +71,7 @@ function App() {
       <div className="App">
         <Header firebase={firebase} auth={auth} user={user} />
         <DifficultyContainer />
+        <Footer />
       </div>
     );
   }
@@ -89,6 +91,7 @@ function App() {
           </div>
           <Score />
         </div>
+        <Footer />
       </div>
     );
   }
@@ -102,6 +105,7 @@ function App() {
           firebase={firebase}
           user={user}
         />
+        <Footer />
       </div>
     );
   }
