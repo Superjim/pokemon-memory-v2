@@ -1,6 +1,12 @@
 import React from "react";
+import { Pokemon } from "../contexts/GameContext";
 
-function PokemonCard({ pokemon, handleCheck }) {
+type PokemonCardProps = {
+  pokemon: Pokemon;
+  handleCheck: (pokemon: Pokemon) => void;
+};
+
+function PokemonCard({ pokemon, handleCheck }: PokemonCardProps) {
   const type = pokemon.type + " pokemon-card";
 
   const handleClick = () => {

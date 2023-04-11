@@ -1,6 +1,22 @@
 import React from "react";
 
-function Checkbox({ label, id, range, image, checked, onChange }) {
+interface CheckboxProps {
+  label: string;
+  id: string;
+  range: string;
+  image?: string;
+  checked: boolean;
+  onChange: () => void;
+}
+
+function Checkbox({
+  label,
+  id,
+  range,
+  image,
+  checked,
+  onChange,
+}: CheckboxProps) {
   return (
     <div
       className="checkbox"

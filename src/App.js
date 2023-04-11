@@ -64,7 +64,7 @@ function App() {
     }
 
     getPokemonData();
-  }, [gameData]);
+  }, [gameData, setGameState, setLoading]);
 
   if (loading) {
     return (
