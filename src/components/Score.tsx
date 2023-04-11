@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GameContext } from "../contexts/GameContext";
 
-function Score() {
+function Score(): JSX.Element {
   const { score, highScore, gameState } = useContext(GameContext);
 
   return (

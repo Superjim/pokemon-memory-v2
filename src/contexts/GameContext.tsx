@@ -1,10 +1,130 @@
 import React, { useState, createContext } from "react";
 
-const GameContext = createContext();
+export interface Pokemon {
+  name: string;
+  index: number;
+  image: string;
+  type: string;
+}
 
-const GameProvider = (props) => {
+interface GameProviderProps {
+  children: React.ReactNode;
+}
+
+export interface GameContextType {
+  gameData: Pokemon[];
+  setGameData: (data: Pokemon[]) => void;
+  gameState: Pokemon[];
+  setGameState: (state: Pokemon[]) => void;
+  clicked: Pokemon[];
+  setClicked: (clicked: Pokemon[]) => void;
+  generation: string;
+  setGeneration: (generation: string) => void;
+  shufflePokemon: () => void;
+  score: number;
+  incrementScore: () => void;
+  resetScore: () => void;
+  highScore: number;
+  setHighScore: (score: number) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+  handleCheck: (pokemon: Pokemon) => void;
+  gameover: boolean;
+  page: number;
+  newGame: () => void;
+  nextPage: () => void;
+  prevPage: () => void;
+  theme:
+    | "gyrados"
+    | "syther"
+    | "pikachu"
+    | "arbok"
+    | "pidgey"
+    | "venasaur"
+    | "clefairy"
+    | "parasect"
+    | "venomoth"
+    | "onyx"
+    | "jynx"
+    | "mew";
+  setTheme: (
+    theme:
+      | "gyrados"
+      | "syther"
+      | "pikachu"
+      | "arbok"
+      | "pidgey"
+      | "venasaur"
+      | "clefairy"
+      | "parasect"
+      | "venomoth"
+      | "onyx"
+      | "jynx"
+      | "mew"
+  ) => void;
+  updateCSSVariables: (
+    theme:
+      | "gyrados"
+      | "syther"
+      | "pikachu"
+      | "arbok"
+      | "pidgey"
+      | "venasaur"
+      | "clefairy"
+      | "parasect"
+      | "venomoth"
+      | "onyx"
+      | "jynx"
+      | "mew"
+  ) => void;
+}
+
+const initialContext: GameContextType = {
+  gameData: [],
+  setGameData: () => {},
+  gameState: [],
+  setGameState: () => {},
+  clicked: [],
+  setClicked: () => {},
+  generation: "Generation 1",
+  setGeneration: () => {},
+  shufflePokemon: () => {},
+  score: 0,
+  incrementScore: () => {},
+  resetScore: () => {},
+  highScore: 0,
+  setHighScore: () => {},
+  loading: true,
+  setLoading: () => {},
+  handleCheck: () => {},
+  gameover: false,
+  page: 1,
+  newGame: () => {},
+  nextPage: () => {},
+  prevPage: () => {},
+  theme: "gyrados",
+  setTheme: () => {},
+  updateCSSVariables: () => {},
+};
+
+const GameContext = createContext<GameContextType>(initialContext);
+
+const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   //colour themes
-  const [theme, setTheme] = useState("gyrados");
+  const [theme, setTheme] = useState<
+    | "gyrados"
+    | "syther"
+    | "pikachu"
+    | "arbok"
+    | "pidgey"
+    | "venasaur"
+    | "clefairy"
+    | "parasect"
+    | "venomoth"
+    | "onyx"
+    | "jynx"
+    | "mew"
+  >("gyrados");
 
   const themes = {
     //primary - main color
@@ -85,16 +205,17 @@ const GameProvider = (props) => {
     },
   };
 
-  const updateCSSVariables = (theme) => {
+  //can only have one of the themes defined in themes array
+  const updateCSSVariables = (theme: keyof typeof themes) => {
     Object.entries(themes[theme]).forEach(([key, value]) => {
       document.documentElement.style.setProperty(key, value);
     });
   };
 
   // Game flow states
-  const [loading, setLoading] = useState(true);
-  const [gameover, setGameover] = useState(false);
-  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [gameover, setGameover] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
 
   // nav
   const nextPage = () => setPage(page + 1);
@@ -108,10 +229,10 @@ const GameProvider = (props) => {
   };
 
   // game states
-  const [gameData, setGameData] = useState([]);
-  const [gameState, setGameState] = useState([]);
-  const [clicked, setClicked] = useState([]);
-  const [generation, setGeneration] = useState("Generation 1");
+  const [gameData, setGameData] = useState<any[]>([]);
+  const [gameState, setGameState] = useState<any[]>([]);
+  const [clicked, setClicked] = useState<any[]>([]);
+  const [generation, setGeneration] = useState<string>("Generation 1");
 
   const shufflePokemon = () => {
     const shuffled = [...gameState];
@@ -122,7 +243,7 @@ const GameProvider = (props) => {
     setGameState(shuffled);
   };
 
-  const handleCheck = (pokemon) => {
+  const handleCheck = (pokemon: Pokemon) => {
     if (clicked.includes(pokemon)) {
       setClicked([...clicked, pokemon]);
       if (score > highScore) setHighScore(score);
@@ -177,7 +298,7 @@ const GameProvider = (props) => {
         updateCSSVariables,
       }}
     >
-      {props.children}
+      {children}
     </GameContext.Provider>
   );
 };

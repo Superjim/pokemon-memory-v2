@@ -1,17 +1,23 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, ChangeEvent } from "react";
 import { GameContext } from "../contexts/GameContext";
+import { GameContextType } from "../contexts/GameContext";
 
 function Theme() {
-  const { theme, setTheme, updateCSSVariables } = useContext(GameContext);
+  const { theme, setTheme, updateCSSVariables } =
+    useContext<GameContextType>(GameContext);
 
   useEffect(() => {
     updateCSSVariables(theme);
-  }, [theme]);
+  }, [theme, updateCSSVariables]);
+
+  const handleThemeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setTheme(e.target.value as GameContextType["theme"]);
+  };
 
   return (
     <div className="theme-container">
       <h4>Choose Theme:</h4>
-      <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+      <select value={theme} onChange={handleThemeChange}>
         <option value="gyrados">Mr. Mime</option>
         <option value="syther">Syther</option>
         <option value="pikachu">Pikachu</option>
